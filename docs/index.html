@@ -28,6 +28,17 @@
     }
     nav {margin-left: auto;}
 
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 1.9rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
     nav a {
       color: white;
       text-decoration: none;
@@ -40,6 +51,30 @@
       text-align: center;
       padding: 80px 20px;
       background: white;
+    }
+
+    .hero-title {
+      text-align: center;
+      font-size: clamp(2rem, 5.2vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-logo {
+      display: block;
+      height: 150px;
+      max-width: 86vw;
+      object-fit: contain;
+    }
+
+    .hero-subtitle {
+      text-align: center;
+      font-size: clamp(1.1rem, 2.9vw, 1.5rem);
+      margin-bottom: 20px;
     }
 
     .hero h1 {
@@ -74,6 +109,12 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 60px 20px;
+    }
+
+    .about-text,
+    .contact-text {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      line-height: 1.8;
     }
 
     /* services section background white */
@@ -142,6 +183,26 @@
     }
 
     @media (max-width: 900px) {
+      header {
+        padding: 16px 18px;
+      }
+
+      header > div {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 1.08rem;
+      }
+
+      .hero {
+        padding: 60px 16px;
+      }
+
+      .section {
+        padding: 42px 16px;
+      }
+
       .card {
         flex: 0 0 calc((100% - 20px) / 2);
         min-width: 240px;
@@ -149,9 +210,98 @@
     }
 
     @media (max-width: 600px) {
+      header > div {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header img {
+        height: 46px;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      nav {
+        margin-left: 0;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-top: 10px;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        margin-left: 0;
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding: 46px 14px;
+      }
+
+      .hero-logo {
+        height: auto;
+        max-height: 125px;
+      }
+
+      .spinner {
+        width: 34px;
+        height: 34px;
+      }
+
+      .section {
+        padding: 34px 14px;
+      }
+
+      #services,
+      #services2 {
+        padding: 20px 10px 26px;
+      }
+
+      .cards-viewport {
+        margin-top: 12px;
+        overflow: visible;
+      }
+
+      .cards {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        transform: none !important;
+      }
+
       .card {
-        flex: 0 0 100%;
-        min-width: 220px;
+        flex: 0 0 auto;
+        min-width: 0;
+        padding: 16px;
+        border-radius: 10px;
+      }
+
+      .card h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .card p {
+        font-size: 0.92rem;
+        line-height: 1.4;
+      }
+
+      .card[aria-hidden="true"] {
+        display: none;
+      }
+
+      .confetti {
+        display: none;
       }
     }
 
@@ -210,6 +360,7 @@
   <header>
     <div style="display:flex; align-items:center; width:100%;">
       <img src="images/Logo Wort weiß.png" alt="Celebrize Logo" height="70">
+      <button class="menu-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
       <nav>
         <a href="#about">Über uns</a>
         <a href="#services">Leistungen</a>
@@ -219,11 +370,11 @@
   </header>
 
   <section class="hero">
-    <div style="text-align: center; font-size: 48px; margin-bottom: 20px;">
+    <div class="hero-title">
       Schön, dass du da bist!
     </div>
-    <div style="position: relative; display: inline-block;">
-      <img src="images/Logo Wort.png" alt="Celebrize Logo" height="150" style="display: block;">
+    <div class="hero-logo-wrap">
+      <img src="images/Logo Wort.png" alt="Celebrize Logo" class="hero-logo">
       <div class="confetti" style="top: 20%; left: 80%;"></div>
       <div class="confetti" style="top: 20%; left: 80%;"></div>
       <div class="confetti" style="top: 20%; left: 80%;"></div>
@@ -236,7 +387,7 @@
       <div class="confetti" style="top: 20%; left: 50%;"></div>
     </div>
     <div class="spinner"></div>
-    <div style="text-align: center; font-size: 24px; margin-bottom: 20px;">
+    <div class="hero-subtitle">
       Wir bereiten grade alles vor, um deine Feier perfekt zu machen
     </div>
 
@@ -245,7 +396,7 @@
 
   <section class="section" id="about">
     <h2>Über uns</h2>
-    <p style="font-size: 1.2rem; line-height: 1.8;">
+    <p class="about-text">
       Celebrize ist die digitale Plattform für die einfache Planung privater Feiern.
       Wir verbinden dich mit den passenden Dienstleistern – von DJs und Fotografen bis hin zu Locations, Catering uvm. Mit intelligenten Empfehlungen, transparenten Preisen und einer unkomplizierten Buchung wird die Organisation deiner Feier schnell, stressfrei und übersichtlich. So kannst du dich auf das konzentrieren, was wirklich zählt: das Feiern selbst.
     </p>
@@ -365,7 +516,7 @@
 
   <section class="section" id="contact">
     <h2>Kontakt</h2>
-    <p style="font-size: 1.2rem;">Schreib uns an: <a href="mailto:hello@celebrize.de">hello@celebrize.de</a></p>
+    <p class="contact-text">Schreib uns an: <a href="mailto:hello@celebrize.de">hello@celebrize.de</a></p>
   </section>
 
   <footer>
@@ -380,7 +531,33 @@
     window.addEventListener('load', function() {
       window.scrollTo(0, 0);
 
-      var speed = 0.35;
+      var menuToggle = document.querySelector('.menu-toggle');
+      var nav = document.querySelector('header nav');
+      if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
+          var isOpen = nav.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        nav.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (window.innerWidth <= 600) {
+              nav.classList.remove('open');
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      if (window.innerWidth <= 600) {
+        var mobileTracks = document.querySelectorAll('.cards');
+        mobileTracks.forEach(function(track) {
+          track.style.transform = 'none';
+        });
+        return;
+      }
+
+      var speed = window.innerWidth <= 600 ? 0.22 : 0.35;
 
       function startCarousel(sectionId, reverse) {
         var track = document.querySelector('#' + sectionId + ' .cards');
