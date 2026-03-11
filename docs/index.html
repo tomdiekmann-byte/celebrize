@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celebrize</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Century Gothic', Arial, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background: #f0f0f0;
+      color: #222;
+    }
+
+    header {
+      background: black;
+      color: rgb(255, 255, 255);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav {margin-left: auto;}
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #555;
+    }
+
+    .button {
+      display: inline-block;
+      background: white;
+      color: black;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      border: 2px solid #7b49e8;
+    }
+
+    .button:hover {
+      background: #7b49e8;
+      color: white;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* services section background white */
+    #services {
+      background: white;
+      border-radius: 12px;
+      padding: 40px 20px 60px;
+      color: #222;
+    }
+
+    #services2 {
+      background: white;
+      border-radius: 12px;
+      padding: 40px 20px 60px;
+      color: #222;
+      margin-top: 30px;
+    }
+
+    #services2 .card {
+      border-color: #00bcd4;
+    }
+
+    #services2 .card:hover {
+      background: #00bcd4;
+      color: white;
+    }
+
+    .cards-viewport {
+      margin-top: 30px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .cards {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+    }
+
+    .card {
+      background: white;
+      flex: 0 0 calc((1100px - 72px) / 4);
+      min-width: 240px;
+      padding: 26px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      color: black;
+      border: 2px solid #7b49e8;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      line-height: 1.5;
+    }
+
+    .card:hover {
+      background: #7b49e8;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.12rem;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 900px) {
+      .card {
+        flex: 0 0 calc((100% - 20px) / 2);
+        min-width: 240px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        flex: 0 0 100%;
+        min-width: 220px;
+      }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #7b49e8;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Black confetti shooting from logo i dot */
+    .confetti {
+      position: absolute;
+      width: 6px;
+      height: 10px;
+      background: black;
+      border-radius: 1px;
+      animation: shoot 6s ease-out forwards;
+      opacity: 0;
+    }
+    .confetti:nth-child(1) { --x: 1; --y: 0; animation-delay: 0s; } /* right */
+    .confetti:nth-child(2) { --x: 0.7; --y: 0.7; animation-delay: 0.1s; } /* down-right */
+    .confetti:nth-child(3) { --x: 0; --y: 1; animation-delay: 0.2s; } /* down */
+    .confetti:nth-child(4) { --x: -0.7; --y: 0.7; animation-delay: 0.3s; } /* down-left */
+    .confetti:nth-child(5) { --x: -1; --y: 0; animation-delay: 0.4s; } /* left */
+    .confetti:nth-child(6) { --x: -0.7; --y: -0.7; animation-delay: 0.5s; } /* up-left */
+    .confetti:nth-child(7) { --x: 0; --y: -1; animation-delay: 0.6s; } /* up */
+    .confetti:nth-child(8) { --x: 0.7; --y: -0.7; animation-delay: 0.7s; } /* up-right */
+    .confetti:nth-child(9) { --x: 0.5; --y: 0.5; animation-delay: 0.8s; } /* random */
+    .confetti:nth-child(10) { --x: -0.5; --y: -0.5; animation-delay: 0.9s; } /* random */
+
+    @keyframes shoot {
+      0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translate(calc(var(--x) * 200px), calc(var(--y) * 200px)) rotate(720deg) scale(0.2); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: black;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display:flex; align-items:center; width:100%;">
+      <img src="images/Logo Wort weiß.png" alt="Celebrize Logo" height="70">
+      <nav>
+        <a href="#about">Über uns</a>
+        <a href="#services">Leistungen</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div style="text-align: center; font-size: 48px; margin-bottom: 20px;">
+      Schön, dass du da bist!
+    </div>
+    <div style="position: relative; display: inline-block;">
+      <img src="images/Logo Wort.png" alt="Celebrize Logo" height="150" style="display: block;">
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 80%;"></div>
+      <div class="confetti" style="top: 20%; left: 50%;"></div>
+      <div class="confetti" style="top: 20%; left: 50%;"></div>
+      <div class="confetti" style="top: 20%; left: 50%;"></div>
+      <div class="confetti" style="top: 20%; left: 50%;"></div>
+    </div>
+    <div class="spinner"></div>
+    <div style="text-align: center; font-size: 24px; margin-bottom: 20px;">
+      Wir bereiten grade alles vor, um deine Feier perfekt zu machen
+    </div>
+
+    <a href="mailto:hello@celebrize.de" class="button">Jetzt Kontakt aufnehmen</a>
+  </section>
+
+  <section class="section" id="about">
+    <h2>Über uns</h2>
+    <p style="font-size: 1.2rem; line-height: 1.8;">
+      Celebrize ist die digitale Plattform für die einfache Planung privater Feiern.
+      Wir verbinden dich mit den passenden Dienstleistern – von DJs und Fotografen bis hin zu Locations, Catering uvm. Mit intelligenten Empfehlungen, transparenten Preisen und einer unkomplizierten Buchung wird die Organisation deiner Feier schnell, stressfrei und übersichtlich. So kannst du dich auf das konzentrieren, was wirklich zählt: das Feiern selbst.
+    </p>
+  </section>
+
+  <section class="section" id="services">
+    <h2>Für Feiernde</h2>
+    <div class="cards-viewport">
+      <div class="cards">
+        <div class="card">
+          <h3>Intelligente Planung</h3>
+          <p>Sag uns, was du feiern möchtest. Celebrize findet die passenden Anbieter.</p>
+        </div>
+        <div class="card">
+          <h3>KI-Assistentin Carla</h3>
+          <p>Carla begleitet dich durch die Planung und schlägt die besten Optionen vor.</p>
+        </div>
+        <div class="card">
+          <h3>Perfekte Matches</h3>
+          <p>DJs, Fotografen, Locations und mehr. Passend zu Budget, Datum und Stil.</p>
+        </div>
+        <div class="card">
+          <h3>Echtzeit-Verfügbarkeit</h3>
+          <p>Sieh sofort, welche Anbieter verfügbar sind. Keine Anfragen. Kein Warten.</p>
+        </div>
+        <div class="card">
+          <h3>Direkte Buchung</h3>
+          <p>Kommuniziere mit Dienstleistern und buche alles an einem Ort.</p>
+        </div>
+        <div class="card">
+          <h3>Verifizierte Bewertungen</h3>
+          <p>Echte Erfahrungen helfen dir, die beste Wahl zu treffen.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Intelligente Planung</h3>
+          <p>Sag uns, was du feiern möchtest. Celebrize findet die passenden Anbieter.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>KI-Assistentin Carla</h3>
+          <p>Carla begleitet dich durch die Planung und schlägt die besten Optionen vor.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Perfekte Matches</h3>
+          <p>DJs, Fotografen, Locations und mehr. Passend zu Budget, Datum und Stil.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Echtzeit-Verfügbarkeit</h3>
+          <p>Sieh sofort, welche Anbieter verfügbar sind. Keine Anfragen. Kein Warten.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Direkte Buchung</h3>
+          <p>Kommuniziere mit Dienstleistern und buche alles an einem Ort.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Verifizierte Bewertungen</h3>
+          <p>Echte Erfahrungen helfen dir, die beste Wahl zu treffen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services2">
+    <h2>Für Dienstleister</h2>
+    <div class="cards-viewport">
+      <div class="cards">
+        <div class="card">
+          <h3>Mehr Sichtbarkeit</h3>
+          <p>Präsentiere dein Angebot dort, wo Menschen aktiv eine Feier planen.</p>
+        </div>
+        <div class="card">
+          <h3>Neue Buchungsanfragen</h3>
+          <p>Erhalte passende Anfragen von Kunden, die genau deine Leistung suchen.</p>
+        </div>
+        <div class="card">
+          <h3>Professionelles Profil</h3>
+          <p>Zeige deine Leistungen, Bilder, Preise und Bewertungen übersichtlich an einem Ort.</p>
+        </div>
+        <div class="card">
+          <h3>Einfache Verwaltung</h3>
+          <p>Behalte Anfragen, Gespräche und Buchungen jederzeit im Blick.</p>
+        </div>
+        <div class="card">
+          <h3>Statistiken & Einblicke</h3>
+          <p>Analysiere Profilaufrufe, Anfragen und entwickle dein Angebot gezielt weiter.</p>
+        </div>
+        <div class="card">
+          <h3>Faire Provision</h3>
+          <p>Keine monatlichen Gebühren. Du zahlst nur bei erfolgreicher Buchung.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Mehr Sichtbarkeit</h3>
+          <p>Präsentiere dein Angebot dort, wo Menschen aktiv eine Feier planen.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Neue Buchungsanfragen</h3>
+          <p>Erhalte passende Anfragen von Kunden, die genau deine Leistung suchen.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Professionelles Profil</h3>
+          <p>Zeige deine Leistungen, Bilder, Preise und Bewertungen übersichtlich an einem Ort.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Einfache Verwaltung</h3>
+          <p>Behalte Anfragen, Gespräche und Buchungen jederzeit im Blick.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Statistiken & Einblicke</h3>
+          <p>Analysiere Profilaufrufe, Anfragen und entwickle dein Angebot gezielt weiter.</p>
+        </div>
+        <div class="card" aria-hidden="true">
+          <h3>Faire Provision</h3>
+          <p>Keine monatlichen Gebühren. Du zahlst nur bei erfolgreicher Buchung.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Kontakt</h2>
+    <p style="font-size: 1.2rem;">Schreib uns an: <a href="mailto:hello@celebrize.de">hello@celebrize.de</a></p>
+  </section>
+
+  <footer>
+    <p>© 2026 Celebrize. Alle Rechte vorbehalten.</p>
+    <p style="margin-top: 10px;">
+      <a href="impressum.html" style="color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4);">Impressum</a>
+      &nbsp;|&nbsp;
+      <a href="datenschutz.html" style="color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4);">Datenschutz</a>
+    </p>
+  </footer>
+  <script>
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+
+      var speed = 0.35;
+
+      function startCarousel(sectionId, reverse) {
+        var track = document.querySelector('#' + sectionId + ' .cards');
+        var originals = track.querySelectorAll('.card:not([aria-hidden="true"])');
+        var gap = 24;
+        // setWidth = exact scroll distance for one full loop
+        var setWidth = originals.length * (originals[0].offsetWidth + gap);
+
+        // reverse starts mid-loop so cards are visible immediately
+        var pos = reverse ? setWidth / 2 : 0;
+        track.style.transform = 'translateX(-' + pos + 'px)';
+
+        (function tick() {
+          if (reverse) {
+            pos -= speed;
+            if (pos <= 0) pos += setWidth;
+          } else {
+            pos += speed;
+            if (pos >= setWidth) pos -= setWidth;
+          }
+          track.style.transform = 'translateX(-' + pos + 'px)';
+          requestAnimationFrame(tick);
+        })();
+      }
+
+      startCarousel('services', false);
+      startCarousel('services2', true);
+    });
+  </script>
+</body>
+</html>
