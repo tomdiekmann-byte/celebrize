@@ -298,12 +298,13 @@
 
     #services2 .card {
       border-color: #3b82f6;
-      cursor: pointer;
+      cursor: default;
     }
 
     #services2 .card:hover {
       background: #3b82f6;
       color: white;
+      pointer-events: none;
     }
 
     .cards-viewport {
@@ -372,6 +373,7 @@
       transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
       line-height: 1.5;
       position: relative;
+      pointer-events: none;
     }
 
     .card-icon {
