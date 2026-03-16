@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum – Celebrize</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Century Gothic', Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f0f0f0;
+      color: #222;
+      line-height: 1.8;
+    }
+
+    header {
+      background: black;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    header a img {
+      height: 60px;
+    }
+
+    .content {
+      flex: 1;
+      width: 100%;
+      max-width: 900px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 12px;
+      padding: 50px 60px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #111;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 40px;
+      background: white;
+      color: black;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      border: 2px solid #7b49e8;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #7b49e8;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      background: #0a0a0b;
+      color: white;
+      margin-top: 40px;
+      font-size: 0.94rem;
+    }
+
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      padding: 4px 10px;
+      opacity: 0.92;
+      transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.42);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="images/Logo Wort weiß.png" alt="Celebrize Logo"></a>
+  </header>
+
+  <div class="content">
+    <h1>Impressum</h1>
+    <p>Lea Louise Grothe</p>
+    <p>Tom Diekmann</p>
+    <p>Center for Entrepreneurship</p>
+    <p>c/o Celebrize</p>
+    <p>Interaktion 1</p>
+    <p>33619 Bielefeld</p>
+    <p>Deutschland</p>
+
+    <a href="index.html" class="back-btn">← Zurück zur Startseite</a>
+  </div>
+
+  <footer>
+    <p>© 2026 Celebrize. Alle Rechte vorbehalten.</p>
+    <p style="margin-top: 10px;">
+      <a href="impressum.html" class="footer-link">Impressum</a>
+      &nbsp;|&nbsp;
+      <a href="datenschutz.html" class="footer-link">Datenschutz</a>
+    </p>
+  </footer>
+</body>
+</html>
